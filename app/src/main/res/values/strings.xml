@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MeditationUIYouTube</string>
+    <string name="greet">Good Morning,</string>
+    <string name="Tagline">We wish you have a good day!</string>
+    <string name="Heading">Daily Thought!</string>
+    <string name="SubHeading">Meditation - 3 - 10 min </string>
+    <string name="Feature_Heading">Features!</string>
+    <string name="Button_Name">Start</string>
 </resources>
