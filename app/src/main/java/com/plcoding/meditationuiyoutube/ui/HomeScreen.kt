@@ -67,7 +67,7 @@ fun HomeScreen(){
                 ),
                 Feature(
                     title = "Peace",
-                    R.drawable.ic_bubble,
+                    R.drawable.ic_music,
                     BlueViolet3
                 )
             ))
