@@ -1,5 +1,6 @@
 package com.plcoding.meditationuiyoutube.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +37,8 @@ fun HomeScreen(){
         .fillMaxSize()){
         Column {
             GreetingSection()
-            ChipSection(chips = listOf("Sweet sleep","Insomnia", "Depression"))
+            ChipSection(chips = listOf("Sweet sleep","Insomnia", "Depression")
+            )
             CurrentMedication()
             FeatureSection(features = listOf(
                 Feature (
@@ -95,13 +98,14 @@ fun BottomMenu(
         mutableStateOf(initialSelectedItemIndex)
          }
     Row(
+
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
             .fillMaxWidth()
             .background(DeepBlue)
             .padding(15.dp)) {
-        items.forEachIndexed { index, item -> 
+        items.forEachIndexed { index, item ->
             BottomMenuItem(
                 item = item,
                 isSelected = index == selectedItemIndex,
@@ -111,9 +115,7 @@ fun BottomMenu(
                 selectedItemIndex = index
             }
         }
-
     }
-
 }
 
 @Composable
@@ -123,13 +125,13 @@ fun BottomMenuItem(
     activeHighlightColor : Color = ButtonBlue,
     activeTextColor : Color = Color.White,
     inactiveTextColor : Color = AquaBlue,
-    onItemClick : () -> Unit // Understand this
-
+    onItemClick : () -> Unit, // Understand this
 ) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center,
-    modifier = Modifier.clickable {
-        onItemClick
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable {
+            onItemClick
     }) {
         Box(contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -144,7 +146,7 @@ fun BottomMenuItem(
         }
         Text(
             text = item.title,
-            color = if (isSelected)activeTextColor else inactiveTextColor
+            color = if (isSelected)activeTextColor else inactiveTextColor,
         )
     }
 }
@@ -182,16 +184,17 @@ fun GreetingSection(
 @Composable
 fun ChipSection(
     chips : List<String>
-){
-    var selectedChipIndex by remember {
+){ var selectedChipIndex by remember {
         mutableStateOf(0)
     }
+    val context = LocalContext.current
     LazyRow{
         items(chips.size){
             Box(modifier = Modifier
                 .padding(start = 15.dp, top = 15.dp, bottom = 15.dp)
                 .clickable {
                     selectedChipIndex = it
+                    Toast.makeText(context,"Clicked ${chips[selectedChipIndex]}!",Toast.LENGTH_LONG).show()
                 }
                 .clip(RoundedCornerShape(10.dp))
                 .background(
@@ -310,3 +313,4 @@ fun FeatureItem(
 
     }
 }
+
